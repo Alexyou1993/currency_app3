@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import '../widgets/chart_bar.dart';
-import '../models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../models/transaction.dart';
+import '../widgets/chart_bar.dart';
+
 
 class Chart extends StatelessWidget {
   final List<Transaction> recentTranscations;
 
-  Chart(this.recentTranscations);
+  const Chart(this.recentTranscations);
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(
@@ -40,6 +41,7 @@ class Chart extends StatelessWidget {
       },
     );
   }
+
 
   @override
   Widget build(BuildContext context) {

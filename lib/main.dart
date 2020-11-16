@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(
     MyApp(),
@@ -17,13 +18,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Currency app vers 0.01'),
+      home: const MyHomePage(title: 'Currency app version 0.01'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({
+  const MyHomePage({
     Key key,
     this.title,
   }) : super(key: key);
@@ -34,7 +35,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _currencies = ['Ron', 'Dollar', 'Euro'];
+
+  final List <String> _currencies = ['Ron', 'Dollar', 'Euro'];
   String _currentItemSelected = 'Dollar';
   String _currentItemSelected2 = 'Euro';
   double _amount;
@@ -74,11 +76,11 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(children: <Widget>[
           Column(
-            children: [
+            children: <Widget>[
               Container(
                 alignment: Alignment.topLeft,
-                padding: EdgeInsets.all(10),
-                child: Text(
+                padding: const EdgeInsets.all(10),
+                child: const Text(
                   'amount',
                 ),
               ),
@@ -91,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   );
                 },
-                decoration: InputDecoration(hintText: ''),
+                decoration: const InputDecoration(hintText: ''),
               ),
             ],
           ),
@@ -102,10 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 return DropdownMenuItem<String>(
                   value: dropDownStringItem,
                   child: Row(
-                    children: [
+                    children: <Widget>[
                       Container(
                         width: 100,
-                        child: ListTile(
+                        child: const ListTile(
                           leading: CircleAvatar(
                             radius: 30,
                           ),
@@ -122,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onChanged: (String newValueSelected) {
                 setState(
                   () {
-                    this._currentItemSelected = newValueSelected;
+                    _currentItemSelected = newValueSelected;
                   },
                 );
               },
@@ -136,10 +138,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 return DropdownMenuItem<String>(
                   value: dropDownStringItem,
                   child: Row(
-                    children: [
+                    children: <Widget>[
                       Container(
                         width: 100,
-                        child: ListTile(
+                        child: const ListTile(
                           leading: CircleAvatar(
                             radius: 30,
                           ),
@@ -155,7 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
               }).toList(),
               onChanged: (String newValueSelected) {
                 setState(() {
-                  this._currentItemSelected2 = newValueSelected;
+                  _currentItemSelected2 = newValueSelected;
                 });
               },
               value: _currentItemSelected2,
@@ -165,20 +167,19 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.blue,
             child: Container(
               width: 100,
-              child: Text(
+              child: const Text(
                 'convert',
                 textAlign: TextAlign.center,
               ),
             ),
-            onPressed: () {
-              showDialog<String>(
+            onPressed: () => showDialog<String>(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: Text(_convertAmount()),
                     actions: <Widget>[
                       FlatButton(
-                        child: Text('ok'),
+                        child: const Text('ok'),
                         onPressed: () {
                           _amount = 0.0;
                           Navigator.pop(context, null);
@@ -187,8 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   );
                 },
-              );
-            },
+              ),
           ),
         ]),
       ),
