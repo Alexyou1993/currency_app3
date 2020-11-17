@@ -36,7 +36,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  final List <String> _currencies = ['Ron', 'Dollar', 'Euro'];
+  final List <String> _currencies = <String>['Ron', 'Dollar', 'Euro'] ;
   String _currentItemSelected = 'Dollar';
   String _currentItemSelected2 = 'Euro';
   double _amount;
