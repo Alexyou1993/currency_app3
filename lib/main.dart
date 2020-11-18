@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
-  runApp(
-    MyApp(),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,10 +31,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-  final List <String> _currencies = <String>['Ron', 'Dollar', 'Euro'] ;
-  String _currentItemSelected = 'Dollar';
-  String _currentItemSelected2 = 'Euro';
+  final List<String> _currencies = <String>['Ron', 'Dollar', 'Euro'];
+  String _fromCurrency = 'Dollar';
+  String _toCurrency = 'Euro';
   double _amount;
   double _sum;
 
@@ -46,19 +41,23 @@ class _MyHomePageState extends State<MyHomePage> {
     if (_amount == null) {
       return _sum.toString();
     }
+    if (_fromCurrency == _toCurrency) {
+      return _amount.toString() + ' ' + _fromCurrency.toString();
+    }
 
-    if (_currentItemSelected == 'Dollar') {
-      final double ratio = _currentItemSelected2 == 'Euro' ? 0.85 : 4.12;
+    if (_fromCurrency == 'Dollar') {
+      final double ratio = _toCurrency == 'Euro' ? /*EUR*/ 0.85 : /*Lei*/ 4.12;
       _sum = _amount * ratio;
     }
 
-    if (_currentItemSelected == 'Ron') {
-      final double ratio = _currentItemSelected2 == 'Euro' ? 0.21 : 0.24;
+    if (_fromCurrency == 'Ron') {
+      final double ratio = _toCurrency == 'Euro' ? /*EUR*/ 0.21 : /*USD*/ 0.24;
       _sum = _amount * ratio;
     }
 
-    if (_currentItemSelected == 'Euro') {
-      final double ratio = _currentItemSelected2 == 'Dollar' ? 1.18 : 4.87;
+    if (_fromCurrency == 'Euro') {
+      final double ratio =
+          _toCurrency == 'Dollar' ? /*Dollar*/ 1.18 : /*LEU*/ 4.87;
       _sum = _amount * ratio;
     }
 
@@ -74,105 +73,101 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Center(
-        child: Column(children: <Widget>[
-          Column(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.topLeft,
-                padding: const EdgeInsets.all(10),
+        child: Column(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: const EdgeInsets.all(8),
+                  child: const Text(
+                    'amount',
+                  ),
+                ),
+                TextField(
+                  keyboardType: TextInputType.number,
+                  onChanged: (String value) {
+                    setState(() {
+                      _amount = double.parse(value);
+                    });
+                  },
+                ),
+              ],
+            ),
+            Container(
+              color: Colors.blue,
+              child: DropdownButton<String>(
+                items: _currencies.map((String _item) {
+                  return DropdownMenuItem<String>(
+                    value: _item,
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          width: 100,
+                          child: const ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          _item,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+                onChanged: (String value) {
+                  setState(() {
+                    _fromCurrency = value;
+                  });
+                },
+                value: _fromCurrency,
+              ),
+            ),
+            Container(
+              color: Colors.blue,
+              child: DropdownButton<String>(
+                items: _currencies.map((String item) {
+                  return DropdownMenuItem<String>(
+                    value: item,
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          width: 100,
+                          child: const ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          item,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+                onChanged: (String newValueSelected) {
+                  setState(() {
+                    _toCurrency = newValueSelected;
+                  });
+                },
+                value: _toCurrency,
+              ),
+            ),
+            FlatButton(
+              color: Colors.blue,
+              child: Container(
+                width: 100,
                 child: const Text(
-                  'amount',
+                  'convert',
+                  textAlign: TextAlign.center,
                 ),
               ),
-              TextField(
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  setState(
-                    () {
-                      _amount = double.parse(value);
-                    },
-                  );
-                },
-                decoration: const InputDecoration(hintText: ''),
-              ),
-            ],
-          ),
-          Container(
-            color: Colors.blue,
-            child: DropdownButton<String>(
-              items: _currencies.map((String dropDownStringItem) {
-                return DropdownMenuItem<String>(
-                  value: dropDownStringItem,
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        width: 100,
-                        child: const ListTile(
-                          leading: CircleAvatar(
-                            radius: 30,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        dropDownStringItem,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-              onChanged: (String newValueSelected) {
-                setState(
-                  () {
-                    _currentItemSelected = newValueSelected;
-                  },
-                );
-              },
-              value: _currentItemSelected,
-            ),
-          ),
-          Container(
-            color: Colors.blue,
-            child: DropdownButton<String>(
-              items: _currencies.map((String dropDownStringItem) {
-                return DropdownMenuItem<String>(
-                  value: dropDownStringItem,
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        width: 100,
-                        child: const ListTile(
-                          leading: CircleAvatar(
-                            radius: 30,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        dropDownStringItem,
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                );
-              }).toList(),
-              onChanged: (String newValueSelected) {
-                setState(() {
-                  _currentItemSelected2 = newValueSelected;
-                });
-              },
-              value: _currentItemSelected2,
-            ),
-          ),
-          FlatButton(
-            color: Colors.blue,
-            child: Container(
-              width: 100,
-              child: const Text(
-                'convert',
-                textAlign: TextAlign.center,
-              ),
-            ),
-            onPressed: () => showDialog<String>(
+              onPressed: () => showDialog<String>(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
@@ -182,15 +177,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: const Text('ok'),
                         onPressed: () {
                           _amount = 0.0;
-                          Navigator.pop(context, null);
+                          Navigator.pop(context);
                         },
                       ),
                     ],
                   );
                 },
               ),
-          ),
-        ]),
+            ),
+          ],
+        ),
       ),
     );
   }
