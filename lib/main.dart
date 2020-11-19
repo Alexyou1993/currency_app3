@@ -2,15 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
-// todo: format the code
 void main() {
   runApp(
-    MyApp(), // todo: no trailing comma needed when only one argument
+    MyApp(),
   );
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application. ???
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,9 +37,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   final List <String> _currencies = <String>['Ron', 'Dollar', 'Euro'] ;
-  // todo: shorter variable names (ex. fromCurrency)
   String _currentItemSelected = 'Dollar';
-  // todo: shorter variable names (ex. toCurrency)
   String _currentItemSelected2 = 'Euro';
   double _amount;
   double _sum;
@@ -82,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Container(
                 alignment: Alignment.topLeft,
-                padding: const EdgeInsets.all(10), // todo: always use multiple of 4 or 8 when dealing with ui measurements
+                padding: const EdgeInsets.all(10),
                 child: const Text(
                   'amount',
                 ),
@@ -93,10 +90,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(
                     () {
                       _amount = double.parse(value);
-                    }, // todo: no trilling comma
+                    },
                   );
                 },
-                // todo: why empty hint
                 decoration: const InputDecoration(hintText: ''),
               ),
             ],
@@ -104,7 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
           Container(
             color: Colors.blue,
             child: DropdownButton<String>(
-              // todo: shorter variable names
               items: _currencies.map((String dropDownStringItem) {
                 return DropdownMenuItem<String>(
                   value: dropDownStringItem,
@@ -114,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         width: 100,
                         child: const ListTile(
                           leading: CircleAvatar(
-                            radius: 30, // todo: always use multiple of 4 or 8 when dealing with ui measurements
+                            radius: 30,
                           ),
                         ),
                       ),
@@ -126,7 +121,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 );
               }).toList(),
-              // todo: shorter variable names
               onChanged: (String newValueSelected) {
                 setState(
                   () {
@@ -196,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
           ),
-        ]), // todo: trailing comma
+        ]),
       ),
     );
   }
