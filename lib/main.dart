@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My app',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primarySwatch: Colors.lightGreen,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const MyHomePage(title: 'Currency app version 0.01'),
@@ -56,8 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     if (_fromCurrency == 'Euro') {
-      final double ratio =
-          _toCurrency == 'Dollar' ? /*Dollar*/ 1.18 : /*LEU*/ 4.87;
+      final double ratio = _toCurrency == 'Dollar' ? /*Dollar*/ 1.18 : /*LEU*/ 4.87;
       _sum = _amount * ratio;
     }
 
@@ -94,6 +93,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 16.0,
+            ),
             Container(
               color: Colors.blue,
               child: DropdownButton<String>(
@@ -126,6 +128,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 value: _fromCurrency,
               ),
             ),
+            const SizedBox(
+              height: 16.0,
+            ),
             Container(
               color: Colors.blue,
               child: DropdownButton<String>(
@@ -157,6 +162,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
                 value: _toCurrency,
               ),
+            ),
+            const SizedBox(
+              height: 32.0,
             ),
             FlatButton(
               color: Colors.blue,
